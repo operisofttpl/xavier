@@ -4,7 +4,7 @@ provider "aws" {
 
 # security group
 resource "aws_security_group" "master" {
-  vpc_id = "vpc-02e6c2d64f5e6e132"
+  vpc_id = "vpc-0d9a1c5831c65f653"
 
 # port 22 for ssh conection
   ingress {
@@ -53,8 +53,8 @@ resource "aws_instance" "kali_server" {
   ami           = "ami-037a1c3dbe88d5d11"  # Replace with your desired AMI ID
   instance_type = "t3a.2xlarge"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-0fa129c7b7544492c"
-  availability_zone = "ap-south-1b"
+  subnet_id = "subnet-0f08400e16b0f52aa"
+  availability_zone = "ap-south-1a"
   
   security_groups = [aws_security_group.master.id]
   
@@ -72,43 +72,15 @@ resource "aws_instance" "kali_server" {
   EOF
 }
 
-# Metasploit
-resource "aws_instance" "metasploit" {
-  ami           = "ami-0f6d9f901bbe83896"  # Replace with your desired AMI ID
-  instance_type = "t3a.small"  # Replace with your desired instance type
-  key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-0fa129c7b7544492c"
-  availability_zone = "ap-south-1b"
 
-  security_groups = [aws_security_group.master.id]
-  
-  tags = {
-    Name = var.instance_name2
-  }
-}
-
-# Basic Pentesting (marlinspike)
-resource "aws_instance" "basic_pentesting" {
-  ami           = "ami-031799a944a78f0ae"  # Replace with your desired AMI ID
-  instance_type = "t3a.small"  # Replace with your desired instance type
-  key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-0fa129c7b7544492c"
-  availability_zone = "ap-south-1b"
-
-  security_groups = [aws_security_group.master.id]
-  
-  tags = {
-    Name = var.instance_name4
-  }
-}
 
 # Exploitable Windows
 resource "aws_instance" "Windows-10-Pro" {
   ami           = "ami-04fc64393c170125d"  # Replace with your desired AMI ID
   instance_type = "t3.medium"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-0fa129c7b7544492c"
-  availability_zone = "ap-south-1b"
+  subnet_id = "subnet-0f08400e16b0f52aa"
+  availability_zone = "ap-south-1a"
 
   security_groups = [aws_security_group.master.id]
 
@@ -130,18 +102,6 @@ output "pem_file_for_ssh" {
 
 output "kali_server" {
   value = aws_instance.kali_server.private_ip
-}
-
-output "metasploit" {
-  value = aws_instance.metasploit.private_ip
-}
-
-output "marlinspike" {
-  value = aws_instance.basic_pentesting.private_ip
-}
-
-output "marlinspike_user_and_password" {
-  value = "marlinspike"
 }
 
 output "exploitable_Windows" {
