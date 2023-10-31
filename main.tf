@@ -156,5 +156,3 @@ output "exploitable_Windows_Password" {
 output "note" {
   value = "If unable to perform ssh please wait for sometime \n and try again. \nssh -i path-of-pemfile.pem -N -L 3390:127.0.0.1:3390 kali@[kali_server ip] \n Now connect rdp with 127.0.0.1:3390"
 }
-
-
