@@ -10,5 +10,5 @@ variable "instance_name3" {
 
 variable "keypair_name" {
   type = string
-  default = "operisoft_key"
+  default = "ssh_key"
 }
