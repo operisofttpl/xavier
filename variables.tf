@@ -10,5 +10,5 @@ variable "instance_name3" {
 
 variable "keypair_name" {
   type = string
-  default = "ssh_key"
+  default = "CloudLab-Xavier-Engineering123"
 }
