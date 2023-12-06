@@ -76,7 +76,7 @@ resource "aws_instance" "kali_server" {
 
 # Exploitable Windows
 resource "aws_instance" "Windows-10-Pro" {
-  ami           = "ami-04fc64393c170125d"  # Replace with your desired AMI ID
+  ami           = "ami-06855a97985aadb21"  # Replace with your desired AMI ID
   instance_type = "t3.medium"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
   subnet_id = "subnet-0f08400e16b0f52aa"
