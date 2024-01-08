@@ -50,7 +50,7 @@ resource "aws_key_pair" "master-key-pair" {
 
 # Kali rdp
 resource "aws_instance" "kali_server" {
-  ami           = "ami-037a1c3dbe88d5d11"  # Replace with your desired AMI ID
+  ami           = "ami-0ce5862ea490b6e2a"  # Replace with your desired AMI ID
   instance_type = "t3a.2xlarge"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
   subnet_id = "subnet-0f08400e16b0f52aa"
@@ -67,6 +67,8 @@ resource "aws_instance" "kali_server" {
     sudo chmod +x xfce.sh
     sudo ./xfce.sh
     sudo apt install -y dbus-x11
+    sudo systemctl enable xrdp --now
+    echo 'kali:kali' | sudo chpasswd
     sudo systemctl enable xrdp --now
     echo 'kali:kali' | sudo chpasswd
   EOF
