@@ -4,7 +4,7 @@ provider "aws" {
 
 # security group
 resource "aws_security_group" "master" {
-  vpc_id = "vpc-0d9a1c5831c65f653"
+  vpc_id = "vpc-058b12a70cb83205c"
 
 # port 22 for ssh conection
   ingress {
@@ -53,8 +53,8 @@ resource "aws_instance" "kali_server" {
   ami           = "ami-0ce5862ea490b6e2a"  # Replace with your desired AMI ID
   instance_type = "t3a.2xlarge"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-0f08400e16b0f52aa"
-  availability_zone = "ap-south-1a"
+  subnet_id = "subnet-05796c62356e16e48"
+  availability_zone = "ap-south-1b"
   
   security_groups = [aws_security_group.master.id]
   
@@ -78,11 +78,11 @@ resource "aws_instance" "kali_server" {
 
 # Exploitable Windows
 resource "aws_instance" "Windows-10-Pro" {
-  ami           = "ami-06855a97985aadb21"  # Replace with your desired AMI ID
+  ami           = "ami-04fc64393c170125d"  # Replace with your desired AMI ID
   instance_type = "t3.medium"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-0f08400e16b0f52aa"
-  availability_zone = "ap-south-1a"
+  subnet_id = "subnet-05796c62356e16e48"
+  availability_zone = "ap-south-1b"
 
   security_groups = [aws_security_group.master.id]
 
@@ -118,4 +118,3 @@ output "exploitable_Windows_Password" {
 output "note" {
   value = "If unable to perform ssh please wait for sometime \n and try again. \nssh -i path-of-pemfile.pem -N -L 3390:127.0.0.1:3390 kali@[kali_server ip] \n Now connect rdp with 127.0.0.1:3390"
 }
-
