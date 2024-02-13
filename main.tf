@@ -81,13 +81,15 @@ resource "aws_instance" "Windows-10-Pro" {
   ami           = "ami-04fc64393c170125d"  # Replace with your desired AMI ID
   instance_type = "t3.medium"  # Replace with your desired instance type
   key_name      = aws_key_pair.master-key-pair.key_name
-  subnet_id = "subnet-05796c62356e16e48"
+  subnet_id     = "subnet-05796c62356e16e48"
   availability_zone = "ap-south-1b"
-
   security_groups = [aws_security_group.master.id]
-
   tags = {
     Name = var.instance_name3
+  }
+  # Attaching existing IAM role
+  iam_instance_profile {
+    name = "EC2-admin-role"
   }
 }
 
